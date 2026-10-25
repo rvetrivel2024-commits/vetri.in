@@ -1,0 +1,217 @@
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>வெற்றி அடகு கடை - வாசுதேவநல்லூர்</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 5px solid #f39c12;
+        }
+        .container {
+            max-width: 650px;
+            margin: 20px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #1a2a6c;
+            text-align: center;
+            margin-top: 0;
+            font-size: 22px;
+            text-decoration: underline;
+        }
+        .info-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            flex: 1;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        input:focus {
+            border-color: #1a2a6c;
+            outline: none;
+            background-color: #f9f9f9;
+        }
+        .date-time-section {
+            background-color: #fff9f0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #f39c12;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            background-color: #27ae60;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #219150;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>வெற்றி அடகு கடை</h1>
+    <p>மெயின் ரோடு, வாசுதேவநல்லூர்</p>
+</header>
+
+<div class="container">
+    <h2>அடகு வரவுப் பதிவு</h2>
+
+    <!-- இங்கு form-க்கு id கொடுக்கப்பட்டுள்ளது -->
+    <form id="pawnForm">
+        <!-- தேதி மற்றும் நேரம் பகுதி -->
+        <div class="date-time-section">
+            <div class="info-row">
+                <div class="form-group">
+                    <label for="pawn-date">வைத்த நாள் (Date):</label>
+                    <input type="date" id="pawn-date" name="pawn-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="pawn-time">வைத்த நேரம் (Time):</label>
+                    <input type="time" id="pawn-time" name="pawn-time" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">வாடிக்கையாளர் பெயர்:</label>
+            <input type="text" id="name" name="name" placeholder="பெயரை உள்ளிடவும்" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">மொபைல் எண்:</label>
+            <input type="tel" id="phone" name="phone" placeholder="91XXXXXXXX" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">வாடிக்கையாளர் முகவரி:</label>
+            <textarea id="address" name="address" rows="2" placeholder="ஊர் / கதவு எண்"></textarea>
+        </div>
+
+        <div class="info-row">
+            <div class="form-group">
+                <label for="jewel-detail">நகையின் விபரம்:</label>
+                <input type="text" id="jewel-detail" name="jewel-detail" placeholder="உதாரணம்: கம்மல்">
+            </div>
+            <div class="form-group">
+                <label for="weight">எடை (கிராம்):</label>
+                <input type="number" step="0.001" id="weight" name="weight" placeholder="0.000">
+            </div>
+        </div>
+
+        <button type="submit">பதிவு செய் (Save Entry)</button>
+    </form>
+</div>
+
+<footer>
+    &copy; 2026 வெற்றி அடகு கடை | வாசுதேவநல்லூர்
+</footer>
+
+<script>
+    // தற்போதைய தேதி மற்றும் நேரத்தை தானாக நிரப்ப (Auto-fill Local Time)
+    window.addEventListener('DOMContentLoaded', function() {
+        const now = new Date();
+        
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        document.getElementById('pawn-date').value = `${year}-${month}-${day}`;
+        
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('pawn-time').value = `${hours}:${minutes}`;
+    });
+
+    // "பதிவு செய்" பட்டனை அழுத்தும்போது டேட்டாவை டெக்ஸ்ட் ஃபைலாக டவுன்லோட் செய்ய
+    document.getElementById('pawnForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // பேஜ் ரெஃப்ரெஷ் ஆவதை தடுத்தல்
+
+        // ஃபார்மில் உள்ள மதிப்புகளை (Values) எடுப்பது
+        let date = document.getElementById('pawn-date').value;
+        let time = document.getElementById('pawn-time').value;
+        let name = document.getElementById('name').value;
+        let phone = document.getElementById('phone').value;
+        let address = document.getElementById('address').value;
+        let jewel = document.getElementById('jewel-detail').value;
+        let weight = document.getElementById('weight').value;
+
+        // டெக்ஸ்ட் ஃபைலில் எழுதıl வேண்டிய வடிவம் (Format)
+        let fileContent = 
+`==================================
+      வெற்றி அடகு கடை - பதிவு
+==================================
+வைத்த நாள் (Date)   : ${date}
+வைத்த நேரம் (Time)  : ${time}
+வாடிக்கையாளர் பெயர் : ${name}
+மொபைல் எண்         : ${phone}
+முகவரி             : ${address}
+நகையின் விபரம்      : ${jewel}
+எடை (கிராம்)        : ${weight} கிராம்
+==================================`;
+
+        // Blob மற்றும் Download வசதியை உருவாக்குதல்
+        let blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+        let link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        
+        // ஃபைல் பெயரில் வாடிக்கையாளர் பெயரையும் தேதியையும் சேர்ப்பது (உதாரணம்: Ravi_2026-06-07.txt)
+        link.download = `${name}_${date}.txt`;
+        
+        // டவுன்லோட் ஆவதற்காக லிங்க்கை கிளிக் செய்வது
+        link.click();
+
+        // ஃபார்மை மீண்டும் காலி செய்தல் (Optional)
+        alert('விவரங்கள் வெற்றிகரமாக உங்கள் லேப்டாப்பில் டவுன்லோட் ஆனது!');
+        this.reset();
+        
+        // தேதியை மீண்டும் இயல்பு நிலைக்கு கொண்டு வர
+        const now = new Date();
+        document.getElementById('pawn-date').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        document.getElementById('pawn-time').value = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    });
+</script>
+
+</body>
+</html>
